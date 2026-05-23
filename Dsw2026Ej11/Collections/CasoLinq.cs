@@ -16,4 +16,85 @@
  */
 public class CasoLinq
 {
+    public class Libro
+    {
+        public int Id { get; set; }
+        public string Titulo { get; set; }
+        public decimal Precio { get; set; }
+    }
+
+    
+    
+
+        private List<Libro> libros = new List<Libro>();
+
+        public CasoLinq()
+        {
+            libros.Add(new Libro { Id = 1, Titulo = "Hush Hush", Precio = 10000 });
+            libros.Add(new Libro { Id = 2, Titulo = "Crescendo", Precio = 12000 });
+            libros.Add(new Libro { Id = 20, Titulo = "Ficciones", Precio = 8000 });
+            libros.Add(new Libro { Id = 2, Titulo = "Rayo", Precio = 9273 });
+        }
+
+        public Libro GetPrimero()
+        {
+            return libros.FirstOrDefault();
+        }
+
+        public Libro GetUltimo()
+        {
+            return libros.LastOrDefault();
+        }
+
+        public decimal GetTotalPrecio ()
+        {
+            return libros.Sum(l => l.Precio);
+        }
+
+
+        //average es para sacar el promedio
+        public decimal GetPromedioPrecio ()
+        {
+            return libros.Count > 0 ? libros.Average(l => l.Precio) : 0;
+        }
+
+        public List<Libro> GetListById()
+        {
+            return libros.Where(l => l.Id > 15).ToList();
+        }
+
+        public List<string> GetLibros()
+        {
+            return libros.Select(l => $"{l.Titulo} - {l.Precio:C}").ToList();
+        }
+
+        
+        public Libro GetMayorPrecio()
+        {
+        
+            return libros.OrderByDescending(l => l.Precio).FirstOrDefault();
+        }
+
+        
+        public Libro GetMenorPrecio()
+        {
+        
+            return libros.OrderBy(l => l.Precio).FirstOrDefault();
+        }
+
+        
+        public List<Libro> GetMayorPromedio()
+        {
+            decimal promedio = GetPromedioPrecio();
+            return libros.Where(l => l.Precio > promedio).ToList();
+        }
+
+        
+        public List<Libro> GetLibrosOrdenadosPorTituloDesc()
+        {
+            return libros.OrderByDescending(l => l.Titulo).ToList();
+        }
+
+
+    
 }
