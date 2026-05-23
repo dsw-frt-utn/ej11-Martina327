@@ -8,4 +8,38 @@
 //Incluir un método para eliminar un alumno en una determinada posición de la lista
 public class CasoList
 {
+    private List<string> alumnos = new List<string>();
+
+    public void AgregarAlumno(string alumno)
+    {
+        alumnos.Add(alumno);
+    }
+    public List<string> ObtenerAlumnos()
+    {
+        return alumnos;
+    }
+    public string BuscarAlumno(string nombre)
+    {
+        foreach (var alumno in alumnos)
+        {
+            if (alumno.ToLower() == nombre.ToLower())
+            {
+                return alumno;
+            }
+        }
+        return null;
+    }
+
+    public bool EliminarAlumno(string alumno)
+    {
+        return alumnos.Remove(alumno);
+    }
+
+    public void EliminarAlumnoEnPosicion (int Posicion)
+    {
+        if (Posicion >= 0 && Posicion < alumnos.Count)
+        {
+            alumnos.RemoveAt(Posicion);
+        }
+    }
 }
